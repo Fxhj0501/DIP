@@ -55,7 +55,7 @@ void expend(){
     char str[1000];
     FILE *fp,*fout;
     PIXEL nowP[rows][cols];
-    PIXEL newP[rows+15][cols+20];
+    PIXEL newP[rows+20][cols+20];
     char filehead[54];
     fp=fopen("/Users/fengzijian/CLionProjects/BMP/material/Lenna.bmp","rb");
     fout=fopen("/Users/fengzijian/CLionProjects/BMP/material/4.bmp","wb");
@@ -63,28 +63,43 @@ void expend(){
 //    for(auto x:filehead)
 //        cout<<itoa(x,str,16);
     filehead[18]+=20;
-    filehead[22]+=15;
+    filehead[22]+=20;
     fread(nowP,3,rows*cols,fp);
     int i,j;
-    for(i=0;i<rows+15;i++)
-        for(j=0;j<cols+20;j++)
-        {
-            if(i>=rows||j>=cols){
+    int new_width = 512+20;
+//    for(i=0;i<rows+15;i++)
+//        for(j=0;j<cols+20;j++)
+//        {
+//            if(i>=rows||j>=cols){
+//                newP[i][j].R=255;
+//                newP[i][j].G=0;
+//                newP[i][j].B=255;
+//            }else{
+//                newP[i][j].R=nowP[i][j].R;
+//                newP[i][j].G=nowP[i][j].G;
+//                newP[i][j].B=nowP[i][j].B;
+//            }
+//
+//        }
+    for(int i =0;i<new_width;i++){
+        for(int j =0;j<new_width;j++){
+            if(i<10||i>=512+10||j<10||j>=512+10){
                 newP[i][j].R=255;
                 newP[i][j].G=0;
                 newP[i][j].B=255;
-            }else{
-                newP[i][j].R=nowP[i][j].R;
-                newP[i][j].G=nowP[i][j].G;
-                newP[i][j].B=nowP[i][j].B;
             }
-
-
         }
-
+    }
+    for(int i=10,_i=0;i<new_width-10&&_i<512;i++,_i++){
+        for(int j =10,_j=0;j<new_width-10&&_j<512;j++,_j++){
+            newP[i][j].R=nowP[_i][_j].R;
+            newP[i][j].G=nowP[_i][_j].G;
+            newP[i][j].B=nowP[_i][_j].B;
+        }
+    }
     fclose(fp);
     fwrite(filehead,1,54,fout);
-    fwrite(newP,3,(rows+15)*(cols+20),fout);
+    fwrite(newP,3,(rows+20)*(cols+20),fout);
 }
 void lab3(){
     int row=200;
