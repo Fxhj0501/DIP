@@ -1,0 +1,3 @@
+/Users/fengzijian/CLionProjects/BMP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/fengzijian/CLionProjects/BMP/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/fengzijian/CLionProjects/BMP/cmake-build-debug/CMakeFiles/BMP.dir
